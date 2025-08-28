@@ -29,6 +29,13 @@ BEGIN_MESSAGE_MAP(CImageProView, CScrollView)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CImageProView::OnFilePrintPreview)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
+	ON_COMMAND(ID_PIXEL_ADD, &CImageProView::OnPixelAdd)
+	ON_COMMAND(ID_PIXEL_SUB, &CImageProView::OnPixelSub)
+	ON_COMMAND(ID_PIXEL_MUL, &CImageProView::OnPixelMul)
+	ON_COMMAND(ID_PIXEL_DIV, &CImageProView::OnPixelDiv)
+	ON_COMMAND(ID_BINARY, &CImageProView::OnBinary)
+	ON_COMMAND(ID_EXAM1, &CImageProView::OnExam1)
+	ON_COMMAND(ID_Exam2, &CImageProView::OnExam2)
 END_MESSAGE_MAP()
 
 // CImageProView 생성/소멸
@@ -64,6 +71,10 @@ void CImageProView::OnDraw(CDC* pDC)
 	for (int y = 0; y < 256; y++)
 		for (int x = 0; x < 256; x++)
 			pDC->SetPixel(x, y, RGB(pDoc->InputImg[y][x], pDoc->InputImg[y][x], pDoc->InputImg[y][x]));
+
+	for (int y = 0; y < 256; y++)
+		for (int x = 0; x < 256; x++)
+			pDC->SetPixel(x+300, y, RGB(pDoc->ResultImg[y][x], pDoc->ResultImg[y][x], pDoc->ResultImg[y][x]));
 }
 
 void CImageProView::OnInitialUpdate()
@@ -140,3 +151,80 @@ CImageProDoc* CImageProView::GetDocument() const // 디버그되지 않은 버�
 
 
 // CImageProView 메시지 처리기
+
+void CImageProView::OnPixelAdd()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->PixelAdd();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnPixelSub()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->PixelSub();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnPixelMul()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->PixelMul();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnPixelDiv()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->PixelDiv();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnBinary()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Binary();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnExam1()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Exam1();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnExam2()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Exam2();
+
+	Invalidate(FALSE);
+}

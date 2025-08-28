@@ -144,3 +144,102 @@ void CImageProDoc::Dump(CDumpContext& dc) const
 
 
 // CImageProDoc 명령
+
+void CImageProDoc::PixelAdd()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int Value = 0;
+
+	for(int x=0; x<256; x++)
+		for (int y = 0; y < 256; y++) 
+		{
+			Value = InputImg[x][y] + 100;
+			if (Value > 255) 
+				ResultImg[x][y] = 255;
+			else 
+				ResultImg[x][y] = Value;
+		}
+
+	/*for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			ResultImg[x][y] = InputImg[x][y] = 100;
+		}*/
+}
+
+void CImageProDoc::PixelSub()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int Value = 0;
+
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			Value = InputImg[x][y] - 50;
+			if (Value < 0)
+				ResultImg[x][y] = 0;
+			else
+				ResultImg[x][y] = Value;
+		}
+}
+
+void CImageProDoc::PixelMul()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int Value = 0;
+
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			Value = InputImg[x][y] * 1.5;
+			if (Value > 255)
+				ResultImg[x][y] = 255;
+			else
+				ResultImg[x][y] = Value;
+		}
+}
+
+void CImageProDoc::PixelDiv()
+{
+	// TODO: 여기에 구현 코드 추가.
+	
+
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+			ResultImg[x][y] = InputImg[x][y] / 1.5;
+}
+
+void CImageProDoc::Binary()
+{
+	// TODO: 여기에 구현 코드 추가.
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+			if (InputImg[x][y] < 127)
+				ResultImg[x][y] = 0;
+			else
+				ResultImg[x][y] = 255;
+}
+
+void CImageProDoc::Exam1()
+{
+	// TODO: 여기에 구현 코드 추가.
+	for(int x = 0; x < 256; x++)
+		for(int y = 0; y < 256; y++)
+			ResultImg[x][y] = InputImg[x][y];
+
+	for(int x=20; x<50; x++)
+		for(int y=64; y<192; y++)
+			ResultImg[x + 30][y] = InputImg[x][y];
+}
+
+void CImageProDoc::Exam2()
+{
+	// TODO: 여기에 구현 코드 추가.
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+			ResultImg[x][y] = InputImg[x][y];
+
+	for (int x = 20; x < 50; x++)
+		for (int y = 64; y < 192; y++)
+			ResultImg[x + 30][y] = InputImg[69 - x][y];
+}

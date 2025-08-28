@@ -44,6 +44,14 @@ protected:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnPixelAdd();
+	afx_msg void OnPixelSub();
+	afx_msg void OnPixelMul();
+	afx_msg void OnPixelDiv();
+	afx_msg void OnBinary();
+	afx_msg void OnExam1();
+	afx_msg void OnExam2();
 };
 
 #ifndef _DEBUG  // ImageProView.cpp의 디버그 버전
