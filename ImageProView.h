@@ -52,6 +52,13 @@ public:
 	afx_msg void OnBinary();
 	afx_msg void OnExam1();
 	afx_msg void OnExam2();
+	afx_msg void OnExam3();
+	afx_msg void OnPixelTwoImageAdd();
+	afx_msg void OnPixelTwoImageSub();
+	afx_msg void OnPixelTwoImageMul();
+	afx_msg void OnPixelTwoImageDiv();
+	afx_msg void OnHistoView();
+	afx_msg void OnHistoStrech();
 };
 
 #ifndef _DEBUG  // ImageProView.cpp의 디버그 버전

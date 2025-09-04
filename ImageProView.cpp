@@ -36,6 +36,13 @@ BEGIN_MESSAGE_MAP(CImageProView, CScrollView)
 	ON_COMMAND(ID_BINARY, &CImageProView::OnBinary)
 	ON_COMMAND(ID_EXAM1, &CImageProView::OnExam1)
 	ON_COMMAND(ID_Exam2, &CImageProView::OnExam2)
+	ON_COMMAND(ID_EXAM3, &CImageProView::OnExam3)
+	ON_COMMAND(ID_PIXEL_TWO_IMAGE_ADD, &CImageProView::OnPixelTwoImageAdd)
+	ON_COMMAND(ID_PIXEL_TWO_IMAGE_SUB, &CImageProView::OnPixelTwoImageSub)
+	ON_COMMAND(ID_PIXEL_TWO_IMAGE_MUL, &CImageProView::OnPixelTwoImageMul)
+	ON_COMMAND(ID_PIXEL_TWO_IMAGE_DIV, &CImageProView::OnPixelTwoImageDiv)
+	ON_COMMAND(ID_HISTO_VIEW, &CImageProView::OnHistoView)
+	ON_COMMAND(ID_HISTO_STRECH, &CImageProView::OnHistoStrech)
 END_MESSAGE_MAP()
 
 // CImageProView 생성/소멸
@@ -75,6 +82,10 @@ void CImageProView::OnDraw(CDC* pDC)
 	for (int y = 0; y < 256; y++)
 		for (int x = 0; x < 256; x++)
 			pDC->SetPixel(x+300, y, RGB(pDoc->ResultImg[y][x], pDoc->ResultImg[y][x], pDoc->ResultImg[y][x]));
+
+	for (int y = 0; y < 256; y++)
+		for (int x = 0; x < 256; x++)
+			pDC->SetPixel(x, y+300, RGB(pDoc->InputImg2[y][x], pDoc->InputImg2[y][x], pDoc->InputImg2[y][x]));
 }
 
 void CImageProView::OnInitialUpdate()
@@ -225,6 +236,83 @@ void CImageProView::OnExam2()
 	ASSERT_VALID(pDoc);
 
 	pDoc->Exam2();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnExam3()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Exam3();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnPixelTwoImageAdd()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Two_Image_Add();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnPixelTwoImageSub()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Two_Image_Sub();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnPixelTwoImageMul()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Two_Image_Mul();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnPixelTwoImageDiv()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Two_Image_Div();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnHistoView()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Histogram();
+
+	Invalidate(FALSE);
+}
+
+void CImageProView::OnHistoStrech()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+
+	pDoc->Histo_Strech();
 
 	Invalidate(FALSE);
 }

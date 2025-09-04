@@ -243,3 +243,214 @@ void CImageProDoc::Exam2()
 		for (int y = 64; y < 192; y++)
 			ResultImg[x + 30][y] = InputImg[69 - x][y];
 }
+
+void CImageProDoc::Exam3()
+{
+	// TODO: 여기에 구현 코드 추가.
+	for (int x = 0; x < 256; x++) {
+		for (int y = 0; y < 256; y++) {
+			ResultImg[x][y] = InputImg[x][y];
+		}
+	}
+	for (int x = 0; x < 5; x++) {
+		for (int y = 60; y < 200; y++) {
+			ResultImg[20 + x][y] = 255;
+			ResultImg[50 - x][y] = 255;
+		}
+	}
+	for (int y = 0; y < 5; y++) {
+		for (int x = 20; x < 50; x++) {
+			ResultImg[x][60 + y] = 255;
+			ResultImg[x][200 - y] = 255;
+		}
+	}
+	
+}
+
+void CImageProDoc::LoadTwoImages()
+{
+	// TODO: 여기에 구현 코드 추가.
+	CFile file;	//CFile 객체 선언
+	CFileDialog dlg(TRUE);	// 파일 선택 대화상자 객체 선언
+							// TRUE:파일 열기
+							// FLASE:파일 저장
+
+	AfxMessageBox(L"첫 번째 영상파일을 선택하세요!");
+
+	if (dlg.DoModal() == IDOK) {	//파일 선택 대화 상자 실행
+		file.Open(dlg.GetPathName(), CFile::modeRead);	//파일 열기
+		file.Read(InputImg, 256 * 256);	//영상 읽기
+		file.Close();	//파일 닫기
+	}
+
+	AfxMessageBox(L"두 번째 영상파일을 선택하세요!");
+
+	if (dlg.DoModal() == IDOK) {	//파일 선택 대화 상자 실행
+		file.Open(dlg.GetPathName(), CFile::modeRead);	//파일 열기
+		file.Read(InputImg2, 256 * 256);	//영상 읽기
+		file.Close();	//파일 닫기
+	}
+}
+
+void CImageProDoc::Two_Image_Add()
+{
+	// TODO: 여기에 구현 코드 추가.
+	LoadTwoImages();
+
+	int data = 0;
+
+	for(int x = 0; x< 256; x++)
+		for (int y = 0; y < 256; y++) 
+		{
+			data = InputImg[x][y] + InputImg2[x][y];
+
+			if (data > 255)
+				ResultImg[x][y] = 255;
+			else
+				ResultImg[x][y] = data;
+
+		}
+}
+
+void CImageProDoc::Two_Image_Sub()
+{
+	// TODO: 여기에 구현 코드 추가.
+	LoadTwoImages();
+
+	int data = 0;
+
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			data = InputImg[x][y] - InputImg2[x][y];
+
+			if (data < 0)
+				ResultImg[x][y] = 0;
+			else
+				ResultImg[x][y] = data;
+
+		}
+}
+
+void CImageProDoc::Two_Image_Mul()
+{
+	// TODO: 여기에 구현 코드 추가.
+	LoadTwoImages();
+
+	int data = 0;
+
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			data = InputImg[x][y] | InputImg2[x][y];
+
+			if (data > 255)
+				ResultImg[x][y] = 255;
+			else
+				ResultImg[x][y] = data;
+
+		}
+}
+
+void CImageProDoc::Two_Image_Div()
+{
+	// TODO: 여기에 구현 코드 추가.
+	LoadTwoImages();
+
+	int data = 0;
+
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			if (InputImg2[x][y] == 0) 
+			{
+				ResultImg[x][y] = InputImg[x][y];
+			}
+			else
+			{
+				ResultImg[x][y] = InputImg[x][y] / InputImg2[x][y];
+			}
+			
+		}
+}
+
+void CImageProDoc::Histogram()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int k, value, m = 0;
+	int histo[256];
+	int temp[256][256];
+
+	for (int z = 0; z < 256; z++) 
+	{
+		histo[z] = 0;
+		for (int w = 0; w < 256; w++)
+			temp[z][w] = 0;
+	}
+
+	for(int x=0; x<256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			k = InputImg[x][y];
+			histo[k] = histo[k] + 1;
+		}
+	for (int x = 0; x < 256; x++)
+	{
+		value = histo[x] / 5;
+
+		if (value > 255)
+			value = 255;
+
+		for (int y = 0; y < value; y++)
+			temp[y][x] = 128;
+	}
+
+	for(int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			m = (255 - x);
+			ResultImg[m][y] = temp[x][y];
+		}
+}
+
+void CImageProDoc::Histo_Strech()
+{
+	// TODO: 여기에 구현 코드 추가.
+	int max = 255;
+	int k, min = 0;
+	int histo[256];
+
+	for (int z = 0; z < 256; z++)
+		histo[z] = 0;
+
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			k = InputImg[x][y];
+			histo[k] = histo[k] + 1;
+		}
+
+	for (int z = 0; z < 256; z++)
+	{
+		if (histo[z])
+		{
+			min = z;
+			break;
+		}
+	}
+
+	for (int z = 255; z > 0; z--)
+	{
+		if (histo[z])
+		{
+			max = z;
+			break;
+		}
+	}
+
+	for (int x = 0; x < 256; x++)
+		for (int y = 0; y < 256; y++)
+		{
+			ResultImg[x][y] = ((InputImg[x][y] - min) * 255) / (max - min);
+		}
+}

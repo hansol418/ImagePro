@@ -15,7 +15,8 @@ protected: // serialization에서만 만들어집니다.
 // 특성입니다.
 public:
 	unsigned char InputImg[256][256];   // 입력영상 저장공간
-	unsigned char ResultImg[256][256];   // 결과영상 저장공간
+	unsigned char InputImg2[256][256];	// 또 다른 입력영상 저장공간
+	unsigned char ResultImg[256][256];  // 결과영상 저장공간
 
 // 작업입니다.
 public:
@@ -55,4 +56,12 @@ public:
 	void Binary();
 	void Exam1();
 	void Exam2();
+	void Exam3();
+	void LoadTwoImages();
+	void Two_Image_Add();
+	void Two_Image_Sub();
+	void Two_Image_Mul();
+	void Two_Image_Div();
+	void Histogram();
+	void Histo_Strech();
 };
